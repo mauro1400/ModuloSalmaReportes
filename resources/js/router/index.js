@@ -1,18 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import certidicadoOrigen from '../reporteCertificadoOrigen/router'
 
 Vue.use(VueRouter)
-const home = [
+const reportes = [
     {
-        path: '/home',
-        name: 'home',
-        component: () => import('../home.vue'),
+        path: '/',
+        name: 'Home',
+        component: () => import('../Home.vue'),
         meta: {
             title: 'Inicio',
             //requiresAuth: true,
             //middleware: 'auth',
         },
-        //children: auth.concat(estudiante, usuario, chofer, apoderado, transporte)
+        children: (certidicadoOrigen)
     }, {
         name: 'notfoundcomponent',
         path: '*',
@@ -22,10 +23,10 @@ const home = [
         }
     }
 ]
-//const routes = auth.concat(home)
+const routes = (reportes)
 var router = new VueRouter({
     mode: 'history',
-    home
+    routes
 })
 
 export default router

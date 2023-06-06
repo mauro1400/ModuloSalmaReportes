@@ -5166,6 +5166,30 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/reporteCertificadoOrigen/router/index.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/reporteCertificadoOrigen/router/index.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+  name: 'certidicadoOrigen',
+  path: '/certidicadoOrigen',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_reporteCertificadoOrigen_components_index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/index.vue */ "./resources/js/reporteCertificadoOrigen/components/index.vue"));
+  },
+  meta: {
+    title: 'certidicadoOrigen'
+  }
+}]);
+
+/***/ }),
+
 /***/ "./resources/js/router/index.js":
 /*!**************************************!*\
   !*** ./resources/js/router/index.js ***!
@@ -5177,23 +5201,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _reporteCertificadoOrigen_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../reporteCertificadoOrigen/router */ "./resources/js/reporteCertificadoOrigen/router/index.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var home = [{
-  path: '/home',
-  name: 'home',
+
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var reportes = [{
+  path: '/',
+  name: 'Home',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ "resources_js_home_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../home.vue */ "./resources/js/home.vue"));
+    return __webpack_require__.e(/*! import() */ "resources_js_Home_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../Home.vue */ "./resources/js/Home.vue"));
   },
   meta: {
     title: 'Inicio'
     //requiresAuth: true,
     //middleware: 'auth',
-  }
-  //children: auth.concat(estudiante, usuario, chofer, apoderado, transporte)
+  },
+
+  children: _reporteCertificadoOrigen_router__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
   name: 'notfoundcomponent',
   path: '*',
@@ -5204,10 +5231,10 @@ var home = [{
     title: 'No Encontrado'
   }
 }];
-//const routes = auth.concat(home)
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var routes = reportes;
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   mode: 'history',
-  home: home
+  routes: routes
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
@@ -42490,7 +42517,7 @@ module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBun
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_home_vue":1,"Navbar":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Home_vue":1,"resources_js_reporteCertificadoOrigen_components_index_vue":1,"Navbar":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

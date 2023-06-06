@@ -38,7 +38,7 @@ var render = function render() {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Mi Sitio")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_vm._v("Reportes Salma")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "collapse navbar-collapse",
     attrs: {
       id: "navbarNav"
@@ -50,23 +50,39 @@ var render = function render() {
   }, [_c("router-link", {
     staticClass: "nav-link",
     attrs: {
+      to: {
+        name: "certidicadoOrigen"
+      }
+    }
+  }, [_vm._v("Reporte Certificados de Origen")])], 1), _vm._v(" "), _c("li", {
+    staticClass: "nav-item"
+  }, [_c("router-link", {
+    staticClass: "nav-link",
+    attrs: {
       to: "/"
     }
-  }, [_vm._v("Inicio")])], 1), _vm._v(" "), _c("li", {
+  }, [_vm._v("Reporte de Articulo")])], 1), _vm._v(" "), _c("li", {
     staticClass: "nav-item"
   }, [_c("router-link", {
     staticClass: "nav-link",
     attrs: {
-      to: "/about"
+      to: "/"
     }
-  }, [_vm._v("Acerca de")])], 1), _vm._v(" "), _c("li", {
+  }, [_vm._v("Reporte de Partida")])], 1), _vm._v(" "), _c("li", {
     staticClass: "nav-item"
   }, [_c("router-link", {
     staticClass: "nav-link",
     attrs: {
-      to: "/contact"
+      to: "/"
     }
-  }, [_vm._v("Contacto")])], 1)])])]);
+  }, [_vm._v("Solicitud de Articulo")])], 1), _vm._v(" "), _c("li", {
+    staticClass: "nav-item"
+  }, [_c("router-link", {
+    staticClass: "nav-link",
+    attrs: {
+      to: "/"
+    }
+  }, [_vm._v("Formulario de Inexistencia")])], 1)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
