@@ -21,7 +21,7 @@ class ReporteCertificadoOrigenController extends Controller
             DB::commit();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Datos Chofer',
+                'message' => 'Consulta realizada con exito',
                 'busqueda' => $busqueda,
             ], 200);
         } catch (\Throwable $th) {
