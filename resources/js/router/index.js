@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import certidicadoOrigen from '../reporteCertificadoOrigen/router'
 
 Vue.use(VueRouter)
+
 const reportes = [
     {
         path: '/',
@@ -10,8 +11,6 @@ const reportes = [
         component: () => import('../Home.vue'),
         meta: {
             title: 'Inicio',
-            //requiresAuth: true,
-            //middleware: 'auth',
         },
         children: (certidicadoOrigen)
     }, {

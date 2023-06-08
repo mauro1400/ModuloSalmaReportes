@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 
 Route::post('/busquedaCertificadoOrigen', [ReporteCertificadoOrigenController::class, 'busquedaCertificadoOrigen']);
+Route::post('/filtrosBusqueda', [ReporteCertificadoOrigenController::class, 'filtrosBusqueda']);
