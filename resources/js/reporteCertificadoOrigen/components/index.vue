@@ -41,47 +41,54 @@
                             </div>
                             <div class="col-md-2 mb-4">
                                 <br>
-                                <button type="submit" class="btn btn-outline-success">Buscar</button>
-                                <button type="button" class="btn btn-outline-   " @click="resetForm">Reiniciar</button>
+                                <button type="submit" class="btn btn-outline-success"><i
+                                        class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+                                <button type="button" class="btn btn-outline-danger" @click="resetForm"><i class="fa-solid fa-trash-can"></i></button>
+                                <a href="#" class="btn btn-outline-success"><i class="fa-regular fa-file-excel"></i></a>
                             </div>
                         </div>
                     </form>
                 </div>
                 <hr>
-                <table class="table table-sm small-font">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>#</th>
-                            <th>Fecha de Entrega</th>
-                            <th>Nro Solicitud</th>
-                            <th>Solicitante </th>
-                            <th>Administrador</th>
-                            <th>Departamento</th>
-                            <th>Articulo</th>
-                            <th>Block Certificado</th>
-                            <th>Entregado</th>
-                            <th>Observacion</th>
-                            <th>Del</th>
-                            <th>Al</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in busquedas" :key="index">
-                            <td>{{ index + 1 }}</td>
-                            <td>{{ item.fecha_entrega }}</td>
-                            <td>{{ item.nro_solicitud }}</td>
-                            <td>{{ item.solicitante }}</td>
-                            <td>{{ item.administrador }}</td>
-                            <td>{{ item.departamento }}</td>
-                            <td>{{ item.articulo }}</td>
-                            <td>{{ item.pedido }}</td>
-                            <td>{{ item.entregado }}</td>
-                            <td>{{ item.observacion }}</td>
-                            <td>{{ item.del }}</td>
-                            <td>{{ item.al }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <template v-if="busquedas.length === 0">
+                    <no-hay-resultados></no-hay-resultados>
+                </template>
+                <template v-else>
+                    <table class="table table-sm small-font">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha de Entrega</th>
+                                <th>Nro Solicitud</th>
+                                <th>Solicitante </th>
+                                <th>Administrador</th>
+                                <th>Departamento</th>
+                                <th>Articulo</th>
+                                <th>Block Certificado</th>
+                                <th>Entregado</th>
+                                <th>Observacion</th>
+                                <th>Del</th>
+                                <th>Al</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in busquedas" :key="index">
+                                <td>{{ index + 1 }}</td>
+                                <td>{{ item.fecha_entrega }}</td>
+                                <td>{{ item.nro_solicitud }}</td>
+                                <td>{{ item.solicitante }}</td>
+                                <td>{{ item.administrador }}</td>
+                                <td>{{ item.departamento }}</td>
+                                <td>{{ item.articulo }}</td>
+                                <td>{{ item.pedido }}</td>
+                                <td>{{ item.entregado }}</td>
+                                <td>{{ item.observacion }}</td>
+                                <td>{{ item.del }}</td>
+                                <td>{{ item.al }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </template>
             </div>
         </section>
     </div>
@@ -93,7 +100,11 @@
 </style>
 <script>
 import axios from 'axios';
+import NoHayResultados from '../../witgets/noHayResultados.vue';
 export default {
+    components: {
+        NoHayResultados,
+    },
     data() {
         return {
             regional: '',
