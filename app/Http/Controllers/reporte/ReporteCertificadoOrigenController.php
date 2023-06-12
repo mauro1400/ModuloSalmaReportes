@@ -20,15 +20,13 @@ class ReporteCertificadoOrigenController extends Controller
             if (empty($certificado)) {
                 $certificado = "CERTIFICADO";
             }
-            $busqueda = ConsultaReporteCertificadosOrigen::consultaCerificadoOrigen($regional, $fechainicio, $fechafin, $solicitante, $certificado);
-
-            $departments = DB::table('departments')->get();
+            $busqueda = ConsultaReporteCertificadosOrigen::consultaCertificadoOrigen($regional, $fechainicio, $fechafin, $solicitante, $certificado);
+            
             DB::commit();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Consulta realizada con exito',
                 'busqueda' => $busqueda,
-                'regional' => $departments,
             ], 200);
         } catch (\Throwable $th) {
             DB::rollback();
@@ -38,6 +36,7 @@ class ReporteCertificadoOrigenController extends Controller
             ]);
         }
     }
+    
     public function filtrosBusqueda()
     {
         try {

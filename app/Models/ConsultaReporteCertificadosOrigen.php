@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ConsultaReporteCertificadosOrigen extends Model
 {
-    public static function consultaCerificadoOrigen($regional, $fechainicio, $fechafin, $solicitante, $certificado)
+    public static function consultaCertificadoOrigen($regional, $fechainicio, $fechafin, $solicitante, $certificado)
     {
-        $reporteCertificadoOrigen =  DB::table(function ($query) {
+        $reporteCertificadoOrigen = DB::table(function ($query) {
             $query->select(
                 'r.delivery_date as fecha_entrega',
                 'r.nro_solicitud',
@@ -31,15 +31,18 @@ class ConsultaReporteCertificadosOrigen extends Model
                 ->leftJoin('subarticles as s', 's.id', '=', 'sq.subarticle_id')
                 ->leftJoin('departments as d', 'd.id', '=', 'u.department_id')
                 ->whereNotNull('sq.observacion');
-        }, 't')
-            ->select('t.*', DB::raw('(((t.al-t.del)+1)/25) as certificados'))
+        }, 't')->select('t.*', DB::raw('(((t.al - t.del) + 1) / 25) as certificados'))
             ->where(function ($query) use ($regional, $solicitante, $certificado, $fechainicio, $fechafin) {
                 $query->where(function ($query) use ($regional, $solicitante, $certificado) {
                     $query->where('t.departamento', 'like', '%' . $regional . '%')
-                        ->where('t.solicitante', 'like', '%' . $solicitante . '%')
-                        ->where('t.articulo', 'like', '%' . $certificado . '%');
+                        ->where('t.articulo', 'like', '%' . $certificado . '%')
+                        ->where('t.solicitante', 'like', '%' . $solicitante . '%');
                 })
-                    ->orWhereBetween('t.fecha_entrega', [$fechainicio, $fechafin]);
+                    ->where(function ($query) use ($fechainicio, $fechafin) {
+                        if (!empty($fechainicio) && !empty($fechafin)) {
+                            $query->whereBetween('t.fecha_entrega', [$fechainicio, $fechafin]);
+                        }
+                    });
             })
             ->whereNotNull('t.al')
             ->get();

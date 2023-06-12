@@ -22,9 +22,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       regional: '',
-      fachaInicio: '',
-      fechaFin: '',
-      servidor: '',
+      fechainicio: '',
+      fechafin: '',
+      solicitante: '',
       certificado: '',
       busquedas: [],
       regionales: [],
@@ -47,18 +47,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/busquedaCertificadoOrigen', {
                 regional: _this.regional,
-                fachaInicio: _this.fachaInicio,
-                fechaFin: _this.fechaFin,
-                servidor: _this.servidor,
+                fechainicio: _this.fechainicio,
+                fechafin: _this.fechafin,
+                solicitante: _this.solicitante,
                 certificado: _this.certificado
               }, {
                 headers: {
-                  'Accept': "application/json"
+                  'Accept': 'application/json'
                 }
               });
             case 3:
               respuesta = _context.sent;
-              console.log(respuesta.data.busqueda);
+              console.log(respuesta.data);
               _this.busquedas = respuesta.data.busqueda;
               _context.next = 11;
               break;
@@ -186,7 +186,7 @@ var render = function render() {
     attrs: {
       value: ""
     }
-  }, [_vm._v("Seleccionar Regional")]), _vm._v(" "), _vm._l(_vm.regionales, function (option) {
+  }, [_vm._v("Seleccione Regional")]), _vm._v(" "), _vm._l(_vm.regionales, function (option) {
     return _c("option", {
       domProps: {
         value: option.name
@@ -203,21 +203,22 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.fachaInicio,
-      expression: "fachaInicio"
+      value: _vm.fechainicio,
+      expression: "fechainicio"
     }],
     staticClass: "form-control form-control-sm",
     attrs: {
-      type: "date",
-      id: "fachaInicio"
+      type: "text",
+      id: "fachainicio",
+      placeholder: "Ej. año-mes-dia"
     },
     domProps: {
-      value: _vm.fachaInicio
+      value: _vm.fechainicio
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.fachaInicio = $event.target.value;
+        _vm.fechainicio = $event.target.value;
       }
     }
   })]), _vm._v(" "), _c("div", {
@@ -231,21 +232,22 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.fechaFin,
-      expression: "fechaFin"
+      value: _vm.fechafin,
+      expression: "fechafin"
     }],
     staticClass: "form-control form-control-sm",
     attrs: {
-      type: "date",
-      id: "fechaFin"
+      type: "text",
+      id: "fechafin",
+      placeholder: "Ej. año-mes-dia"
     },
     domProps: {
-      value: _vm.fechaFin
+      value: _vm.fechafin
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.fechaFin = $event.target.value;
+        _vm.fechafin = $event.target.value;
       }
     }
   })]), _vm._v(" "), _c("div", {
@@ -259,8 +261,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.servidor,
-      expression: "servidor"
+      value: _vm.solicitante,
+      expression: "solicitante"
     }],
     staticClass: "form-control form-control-sm",
     attrs: {
@@ -274,14 +276,14 @@ var render = function render() {
           var val = "_value" in o ? o._value : o.value;
           return val;
         });
-        _vm.servidor = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+        _vm.solicitante = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
       }
     }
   }, [_c("option", {
     attrs: {
       value: ""
     }
-  }, [_vm._v("Seleccionar Servidor Publico")]), _vm._v(" "), _vm._l(_vm.solicitantes, function (option) {
+  }, [_vm._v("Seleccione Servidor Publico")]), _vm._v(" "), _vm._l(_vm.solicitantes, function (option) {
     return _c("option", {
       domProps: {
         value: option.name
@@ -320,7 +322,7 @@ var render = function render() {
     attrs: {
       value: ""
     }
-  }, [_vm._v("Seleccionar Tipo de Certificado")]), _vm._v(" "), _vm._l(_vm.certificados, function (option) {
+  }, [_vm._v("Seleccione Tipo de Certificado")]), _vm._v(" "), _vm._l(_vm.certificados, function (option) {
     return _c("option", {
       domProps: {
         value: option.description
@@ -334,7 +336,7 @@ var render = function render() {
       type: "submit"
     }
   }, [_vm._v("Buscar")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-outline-secondary",
+    staticClass: "btn btn-outline-",
     attrs: {
       type: "button"
     },
@@ -377,7 +379,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.small-font {\r\n  font-size: 12px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.small-font {\r\n    font-size: 12px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

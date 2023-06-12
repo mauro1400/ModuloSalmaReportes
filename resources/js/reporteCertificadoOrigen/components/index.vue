@@ -10,30 +10,31 @@
                             <div class="col-md-2 mb-4">
                                 <label class="form-label" for="regional">Regional</label>
                                 <select class="form-control form-control-sm" id="regional" v-model="regional">
-                                    <option value="">Seleccionar Regional</option>
+                                    <option value="">Seleccione Regional</option>
                                     <option v-for="option in regionales" :value="option.name">{{ option.name }}</option>
                                 </select>
                             </div>
                             <div class="col-md-2 mb-4">
                                 <label class="form-label" for="primer_apellido">Fecha Inicio</label>
-                                <input class="form-control form-control-sm" type="date" id="fachaInicio"
-                                    v-model="fachaInicio">
+                                <input class="form-control form-control-sm" type="text" id="fachainicio"
+                                    v-model="fechainicio" placeholder="Ej. año-mes-dia">
                             </div>
                             <div class="col-md-2 mb-4">
                                 <label class="form-label" for="primer_apellido">Fecha Fin</label>
-                                <input class="form-control form-control-sm" type="date" id="fechaFin" v-model="fechaFin">
+                                <input class="form-control form-control-sm" type="text" id="fechafin" v-model="fechafin"
+                                    placeholder="Ej. año-mes-dia">
                             </div>
                             <div class="col-md-2 mb-4">
                                 <label class="form-label" for="ci">Servidor Publico</label>
-                                <select class="form-control form-control-sm" id="servidor" v-model="servidor">
-                                    <option value="">Seleccionar Servidor Publico</option>
+                                <select class="form-control form-control-sm" id="servidor" v-model="solicitante">
+                                    <option value="">Seleccione Servidor Publico</option>
                                     <option v-for="option in solicitantes" :value="option.name">{{ option.name }}</option>
                                 </select>
                             </div>
                             <div class="col-md-2 mb-4">
                                 <label class="form-label" for="celular">Tipo Certificado</label>
                                 <select class="form-control form-control-sm" id="certificado" v-model="certificado">
-                                    <option value="">Seleccionar Tipo de Certificado</option>
+                                    <option value="">Seleccione Tipo de Certificado</option>
                                     <option v-for="option in certificados" :value="option.description">{{ option.description
                                     }}</option>
                                 </select>
@@ -41,8 +42,7 @@
                             <div class="col-md-2 mb-4">
                                 <br>
                                 <button type="submit" class="btn btn-outline-success">Buscar</button>
-                                <button type="button" class="btn btn-outline-secondary"
-                                    @click="resetForm">Reiniciar</button>
+                                <button type="button" class="btn btn-outline-   " @click="resetForm">Reiniciar</button>
                             </div>
                         </div>
                     </form>
@@ -88,7 +88,7 @@
 </template>
 <style>
 .small-font {
-  font-size: 12px;
+    font-size: 12px;
 }
 </style>
 <script>
@@ -97,9 +97,9 @@ export default {
     data() {
         return {
             regional: '',
-            fachaInicio: '',
-            fechaFin: '',
-            servidor: '',
+            fechainicio: '',
+            fechafin: '',
+            solicitante: '',
             certificado: '',
             busquedas: [],
             regionales: [],
@@ -116,16 +116,16 @@ export default {
             try {
                 const respuesta = await axios.post('/api/busquedaCertificadoOrigen', {
                     regional: this.regional,
-                    fachaInicio: this.fachaInicio,
-                    fechaFin: this.fechaFin,
-                    servidor: this.servidor,
+                    fechainicio: this.fechainicio,
+                    fechafin: this.fechafin,
+                    solicitante: this.solicitante,
                     certificado: this.certificado,
                 }, {
                     headers: {
-                        'Accept': `application/json`,
+                        'Accept': 'application/json',
                     },
                 });
-                console.log(respuesta.data.busqueda)
+                console.log(respuesta.data)
                 this.busquedas = respuesta.data.busqueda
             } catch (error) {
                 console.error(error);
