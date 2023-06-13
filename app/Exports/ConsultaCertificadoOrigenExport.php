@@ -2,23 +2,21 @@
 
 namespace App\Exports;
 
-use App\Http\Controllers\reporte\ReporteCertificadoOrigenController;
 use Illuminate\Contracts\View\View;
 use App\Models\ConsultaReporteCertificadosOrigen;
 use Maatwebsite\Excel\Concerns\Exportable;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use PhpOffice\PhpSpreadsheet\Style\Color;
+
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
-use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
 
-class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithStyles,WithDrawings
+class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings, WithColumnWidths
 {
     use Exportable;
 
@@ -52,6 +50,22 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
 
         return view('exports.ConsultaReporteCertificadosOrigen', ['busqueda' => $busqueda]);
     }
+
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 3,
+            'B' => 20,
+            'C' => 9,
+            'D' => 30,
+            'E' => 25,
+            'F' => 30,
+            'G' => 30,
+            'H' => 12,
+            'I' => 10,
+            'J' => 15,
+        ];
+    }
     public function styles(Worksheet $sheet)
     {
         $totalRegistros = $this->totalRegistros;
@@ -65,13 +79,17 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
         $sheet->getStyle('A2:L2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A2:L2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
+        $sheet->getStyle('A4:L4')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A4:L4')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A4:L4')->getAlignment()->setWrapText(true);
+
         $sheet->setCellValue('A2', 'REPORTE CERTIFICADO DE ORIGEN');
 
         $dataRange = 'A5:L' . ($totalRegistros + 4);
         $sheet->getStyle($dataRange)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
         $sheet->getStyle('A')->getAlignment()->setWrapText(true);
         $sheet->getStyle('B')->getAlignment()->setWrapText(true);
-        
+
         $sheet->getStyle('A4:L4')->applyFromArray([
             'borders' => [
                 'allBorders' => [
@@ -93,8 +111,8 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
                 ],
             ],
         ];
-    }
 
+    }
 
     public function drawings()
     {
@@ -103,7 +121,7 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
         $drawing->setPath($imagePath);
         $drawing->setCoordinates('A1');
         $drawing->setHeight(80);
-        
+
         return $drawing;
     }
     private function getTotalRegistros()
