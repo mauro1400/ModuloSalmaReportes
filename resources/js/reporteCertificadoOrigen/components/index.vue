@@ -43,11 +43,13 @@
                                 <br>
                                 <button type="submit" class="btn btn-outline-success"><i
                                         class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-                                <button type="button" class="btn btn-outline-danger" @click="resetForm"><i class="fa-solid fa-trash-can"></i></button>
-                                <a href="#" class="btn btn-outline-success"><i class="fa-regular fa-file-excel"></i></a>
+                                <button type="button" class="btn btn-outline-danger" @click="resetForm"><i
+                                        class="fa-solid fa-trash-can"></i></button>
                             </div>
                         </div>
                     </form>
+                    <button class="btn btn-outline-success" @click="reporte()"><i
+                            class="fa-regular fa-file-excel"></i></button>
                 </div>
                 <hr>
                 <template v-if="busquedas.length === 0">
@@ -123,6 +125,28 @@ export default {
         this.filtrosBusqueda();
     },
     methods: {
+        // En el método reporte() del componente index.vue
+        reporte() {
+            const requestData = {
+                regional: this.regional,
+                fechainicio: this.fechainicio,
+                fechafin: this.fechafin,
+                solicitante: this.solicitante,
+                certificado: this.certificado
+            };
+            axios.get('/api/exportReporteCO', { params: requestData, responseType: 'blob' })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'datos.xlsx');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         async submitForm() {
             try {
                 const respuesta = await axios.post('/api/busquedaCertificadoOrigen', {
@@ -136,7 +160,6 @@ export default {
                         'Accept': 'application/json',
                     },
                 });
-                console.log(respuesta.data)
                 this.busquedas = respuesta.data.busqueda
             } catch (error) {
                 console.error(error);
@@ -149,7 +172,6 @@ export default {
                         'Accept': `application/json`,
                     },
                 });
-                console.log(respuesta.data.regional)
                 this.regionales = respuesta.data.regional
                 this.solicitantes = respuesta.data.solicitante
                 this.certificados = respuesta.data.certificado
