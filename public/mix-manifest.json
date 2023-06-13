@@ -2,6 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/Navbar.js": "/js/Navbar.js",
     "/css/app.css": "/css/app.css",
+    "/assets/img/logo-snv.png": "/assets/img/logo-snv.png",
+    "/assets/img/logo_snv.jpg": "/assets/img/logo_snv.jpg",
     "/assets/logo/logo-senavex.png": "/assets/logo/logo-senavex.png",
     "/assets/logo/logo_snv.jpg": "/assets/logo/logo_snv.jpg"
 }
