@@ -60,6 +60,8 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="errorMessage" class="alert alert-danger" v-text="errorMessage" :class="{ fadeOut: fadeOut }">
+                </div>  
                 <div class="card-footer">
                     <template v-if="busquedas.length === 0">
                         <no-hay-resultados></no-hay-resultados>
@@ -109,6 +111,15 @@
 .small-font {
     font-size: 12px;
 }
+.fadeOut {
+    transition: opacity 1s;
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
 </style>
 <script>
 import axios from 'axios';
@@ -128,6 +139,8 @@ export default {
             regionales: [],
             solicitantes: [],
             certificados: [],
+            errorMessage: '',
+            fadeOut: false,
         };
 
     },
@@ -144,12 +157,25 @@ export default {
                 solicitante: this.solicitante,
                 certificado: this.certificado
             };
+
+            if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.certificado) {
+                this.errorMessage = "Se requiere al menos un valor para realizar la consulta.";
+                this.fadeOut = false; 
+                setTimeout(() => {
+                    this.fadeOut = true; 
+                    setTimeout(() => {
+                        this.errorMessage = ''; 
+                    }, 1000); 
+                }, 5000); 
+                return; 
+            }
+
             axios.get('/api/exportReporteCO', { params: requestData, responseType: 'blob' })
                 .then(response => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', 'datos.xlsx');
+                    link.setAttribute('download', 'ReporteCertificadoOrigen.xlsx');
                     document.body.appendChild(link);
                     link.click();
                 })
@@ -157,6 +183,7 @@ export default {
                     console.error(error);
                 });
         },
+
         async submitForm() {
             try {
                 const respuesta = await axios.post('/api/busquedaCertificadoOrigen', {
