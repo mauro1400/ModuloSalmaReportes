@@ -6,5 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/busquedaCertificadoOrigen', [ReporteCertificadoOrigenController::class, 'busquedaCertificadoOrigen']);
-Route::get('/exportReporteCO', [ExcelReporteCertificadoOrigen::class, 'ExcelReporteCertificadoOrigen']);
+Route::post('/exportReporteCO', [ExcelReporteCertificadoOrigen::class, 'ExcelReporteCertificadoOrigen']);
+Route::post('/exportPDFReporteCO', [ExcelReporteCertificadoOrigen::class, 'PDFReporteCertificadoOrigen']);
 Route::post('/filtrosBusqueda', [ReporteCertificadoOrigenController::class, 'filtrosBusqueda']);

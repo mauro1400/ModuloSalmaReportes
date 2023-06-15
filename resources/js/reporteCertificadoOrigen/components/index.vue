@@ -55,9 +55,9 @@
                             </form>
                         </div>
                         <div class="col-md-2 mb-4 d-flex justify-content-start align-items-center">
-                            <button class="btn btn-outline-success" @click="reporte()"><i
+                            <button class="btn btn-outline-success" @click="reporteExcel()"><i
                                     class="fa-regular fa-file-excel"></i></button><span style="margin: 0 10px;"></span>
-                            <button class="btn btn-outline-danger" @click=""><i class="fa-regular fa-file-pdf"></i></button>
+                            <button class="btn btn-outline-danger" @click="reportePDF()"><i class="fa-regular fa-file-pdf"></i></button>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@ export default {
     },
     methods: {
         // En el método reporte() del componente index.vue
-        reporte() {
+        reporteExcel() {
             const requestData = {
                 regional: this.regional,
                 fechainicio: this.fechainicio,
@@ -177,7 +177,7 @@ export default {
                 return;
             }
 
-            axios.get('/api/exportReporteCO', { params: requestData, responseType: 'blob' })
+            axios.post('/api/exportReporteCO', { params: requestData, responseType: 'blob' })
                 .then(response => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
@@ -190,7 +190,47 @@ export default {
                     console.error(error);
                 });
         },
+        reportePDF() {
+            const requestData = {
+                regional: this.regional,
+                fechainicio: this.fechainicio,
+                fechafin: this.fechafin,
+                solicitante: this.solicitante,
+                certificado: this.certificado
+            };
 
+            if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.certificado) {
+                this.errorMessage = "Se requiere al menos un valor para realizar la consulta.";
+                this.fadeOut = false;
+                setTimeout(() => {
+                    this.fadeOut = true;
+                    setTimeout(() => {
+                        this.errorMessage = '';
+                    }, 1000);
+                }, 5000);
+                return;
+            }
+            // Realiza la solicitud HTTP a la función PDFReporteCertificadoOrigen
+            axios.post('/api/exportPDFReporteCO', requestData, { responseType: 'blob' })
+                .then(response => {
+                    // Obtiene el archivo PDF desde la respuesta
+                    const blob = new Blob([response.data], { type: 'application/pdf' });
+                    // Crea un enlace de descarga para el archivo PDF
+                    const downloadLink = document.createElement('a');
+                    const url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    downloadLink.download = 'ReporteCertificadoOrigen.pdf';
+                    // Simula un clic en el enlace de descarga para descargar el archivo PDF
+                    downloadLink.click();
+                    // Libera los recursos del objeto URL
+                    URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    // Manejo de errores en caso de que ocurra algún problema en la solicitud
+                    console.error(error);
+                });
+
+        },
         async submitForm() {
             try {
                 const respuesta = await axios.post('/api/busquedaCertificadoOrigen', {

@@ -48,7 +48,7 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
             $this->certificado
         );
 
-        return view('exports.ConsultaReporteCertificadosOrigen', ['busqueda' => $busqueda]);
+        return view('exports.Excel.ConsultaReporteCertificadosOrigen', ['busqueda' => $busqueda]);
     }
 
     public function columnWidths(): array
