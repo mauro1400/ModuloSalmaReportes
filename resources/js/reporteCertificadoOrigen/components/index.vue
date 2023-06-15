@@ -5,7 +5,7 @@
                 <h3 class="card-header">Reporte Certificados de Origen</h3>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-11 mb-4">
+                        <div class="col-md-10 mb-4">
                             <form @submit.prevent="submitForm">
                                 <div class="row">
                                     <div class="col-md-2 mb-4" style="margin-top: 24px;">
@@ -17,12 +17,12 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="primer_apellido">Fecha Inicio</label>
+                                        <label class="form-label" for="fechainicio">Fecha Inicio</label>
                                         <input class="form-control form-control-sm" type="text" id="fachainicio"
                                             v-model="fechainicio" placeholder="Ej. año-mes-dia">
                                     </div>
                                     <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="primer_apellido">Fecha Fin</label>
+                                        <label class="form-label" for="fechafin">Fecha Fin</label>
                                         <input class="form-control form-control-sm" type="text" id="fechafin"
                                             v-model="fechafin" placeholder="Ej. año-mes-dia">
                                     </div>
@@ -35,7 +35,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="celular">Tipo Certificado</label>
+                                        <label class="form-label" for="certificado">Tipo Certificado</label>
                                         <select class="form-control form-control-sm" id="certificado" v-model="certificado">
                                             <option value="">Seleccione Tipo de Certificado</option>
                                             <option v-for="option in certificados" :value="option.description">{{
@@ -54,14 +54,15 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-1 mb-4 d-flex justify-content-start align-items-center">
+                        <div class="col-md-2 mb-4 d-flex justify-content-start align-items-center">
                             <button class="btn btn-outline-success" @click="reporte()"><i
-                                    class="fa-regular fa-file-excel"></i></button>
+                                    class="fa-regular fa-file-excel"></i></button><span style="margin: 0 10px;"></span>
+                            <button class="btn btn-outline-danger" @click=""><i class="fa-regular fa-file-pdf"></i></button>
                         </div>
                     </div>
                 </div>
                 <div v-if="errorMessage" class="alert alert-danger" v-text="errorMessage" :class="{ fadeOut: fadeOut }">
-                </div>  
+                </div>
                 <div class="card-footer">
                     <template v-if="busquedas.length === 0">
                         <no-hay-resultados></no-hay-resultados>
@@ -111,14 +112,20 @@
 .small-font {
     font-size: 12px;
 }
+
 .fadeOut {
     transition: opacity 1s;
     animation: fadeOut 1s forwards;
 }
 
 @keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 </style>
 <script>
@@ -160,14 +167,14 @@ export default {
 
             if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.certificado) {
                 this.errorMessage = "Se requiere al menos un valor para realizar la consulta.";
-                this.fadeOut = false; 
+                this.fadeOut = false;
                 setTimeout(() => {
-                    this.fadeOut = true; 
+                    this.fadeOut = true;
                     setTimeout(() => {
-                        this.errorMessage = ''; 
-                    }, 1000); 
-                }, 5000); 
-                return; 
+                        this.errorMessage = '';
+                    }, 1000);
+                }, 5000);
+                return;
             }
 
             axios.get('/api/exportReporteCO', { params: requestData, responseType: 'blob' })
