@@ -30,8 +30,8 @@ class ExcelReporteCertificadoOrigen extends Controller
         $pdf = app('dompdf.wrapper');
 
         $regional = $request->input('regional');
-        $fechainicio = $request->input('fechainicio');
         $fechafin = $request->input('fechafin');
+        $fechainicio = $request->input('fechainicio');
         $solicitante = $request->input('solicitante');
         $certificado = $request->input('certificado');
         if (empty($certificado)) {

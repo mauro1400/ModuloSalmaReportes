@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Excel\ReporteArticulos\ExcelReporteArticulos;
 use App\Http\Controllers\Excel\ReporteCertificadoOrigen\ExcelReporteCertificadoOrigen;
 use App\Http\Controllers\reporte\ReporteCertificadoOrigenController;
 use App\Http\Controllers\reporte\ReporteArticulosController;
@@ -14,5 +15,5 @@ Route::post('/exportPDFReporteCO', [ExcelReporteCertificadoOrigen::class, 'PDFRe
 //REPORTE ARTICULOS
 Route::post('/busquedaArticulos', [ReporteArticulosController::class, 'busquedaArticulos']);
 Route::post('/filtrosBusquedaArticulos', [ReporteArticulosController::class, 'filtrosBusqueda']);
-Route::post('/exportReporteArticulos', [ExcelReporteArticulos::class, 'ExcelReporteCertificadoOrigen']);
-Route::post('/exportPDFReporteArticulos', [ExcelReporteArticulos::class, 'PDFReporteCertificadoOrigen']);
+Route::post('/exportReporteArticulos', [ExcelReporteArticulos::class, 'ExcelReporteArticulos']);
+Route::post('/exportPDFReporteArticulos', [ExcelReporteArticulos::class, 'PDFReporteArticulos']);
