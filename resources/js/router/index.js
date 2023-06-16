@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import certidicadoOrigen from '../reporteCertificadoOrigen/router'
+import reporteCertificadoOrigen from '../reporteCertificadoOrigen/router'
+import reporteArticulos from '../reporteArticulos/router'
+import { concat } from 'lodash'
+
 
 Vue.use(VueRouter)
 
@@ -12,7 +15,7 @@ const reportes = [
         meta: {
             title: 'Inicio',
         },
-        children: (certidicadoOrigen)
+        children: concat(reporteCertificadoOrigen,reporteArticulos)
     }, {
         name: 'notfoundcomponent',
         path: '*',

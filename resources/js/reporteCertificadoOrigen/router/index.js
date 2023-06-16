@@ -1,10 +1,10 @@
 export default [
     {
-        name: 'certidicadoOrigen',
-        path: '/certidicadoOrigen',
+        name: 'reporteCertificadoOrigen',
+        path: '/reporteCertificadoOrigen',
         component: () => import('../components/index.vue'),
         meta: {
-            title: 'certidicadoOrigen',
+            title: 'reporteCertificadoOrigen',
         }
     }
 ]

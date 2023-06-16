@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <router-link :to="{name:'certidicadoOrigen'}" class="nav-link color-1">Reporte Certificados de Origen</router-link>
+          <router-link :to="{name:'reporteCertificadoOrigen'}" class="nav-link color-1">Reporte Certificados de Origen</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/" class="nav-link color-2">Reporte de Articulo</router-link>
+          <router-link :to="{name:'reporteArticulos'}" class="nav-link color-2">Reporte de Articulo</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/" class="nav-link color-3">Reporte de Partida</router-link>

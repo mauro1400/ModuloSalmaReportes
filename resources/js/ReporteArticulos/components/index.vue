@@ -2,63 +2,79 @@
     <div class="container-fluid">
         <section class="gradient-custom">
             <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                <h3 class="card-header">Reporte Certificados de Origen</h3>
+                <h3 class="card-header">Reporte de Articulos</h3>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-10 mb-4">
-                            <form @submit.prevent="submitForm">
-                                <div class="row">
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="regional">Regional</label>
-                                        <select class="form-control form-control-sm" id="regional" v-model="regional">
-                                            <option value="">Seleccione Regional</option>
-                                            <option v-for="option in regionales" :value="option.name">{{ option.name }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="fechainicio">Fecha Inicio</label>
-                                        <input class="form-control form-control-sm" type="text" id="fachainicio"
-                                            v-model="fechainicio" placeholder="Ej. año-mes-dia">
-                                    </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="fechafin">Fecha Fin</label>
-                                        <input class="form-control form-control-sm" type="text" id="fechafin"
-                                            v-model="fechafin" placeholder="Ej. año-mes-dia">
-                                    </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="ci">Servidor Publico</label>
-                                        <select class="form-control form-control-sm" id="servidor" v-model="solicitante">
-                                            <option value="">Seleccione Servidor Publico</option>
-                                            <option v-for="option in solicitantes" :value="option.name">{{ option.name }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
-                                        <label class="form-label" for="certificado">Tipo Certificado</label>
-                                        <select class="form-control form-control-sm" id="certificado" v-model="certificado">
-                                            <option value="">Seleccione Tipo de Certificado</option>
-                                            <option v-for="option in certificados" :value="option.description">{{
-                                                option.description
-                                            }}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-4 d-flex justify-content-end align-items-center"
-                                        style="margin-top: 24px;">
-                                        <button type="submit" class="btn btn-outline-success"><i
-                                                class="fa-sharp fa-solid fa-magnifying-glass"></i></button><span
-                                            style="margin: 0 10px;"></span>
-                                        <button type="button" class="btn btn-outline-danger" @click="resetForm"><i
-                                                class="fa-solid fa-trash-can"></i></button>
-                                    </div>
+                    <h5 class="card-title">Inventario General de Almacenes Físico Valorado</h5>
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <form @submit.prevent="submitForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="fechainicio">Fecha Inicio</label>
+                                    <input class="form-control form-control-sm" type="text" id="fachainicio"
+                                        v-model="fechainicio" placeholder="Ej. año-mes-dia">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-2 mb-4 d-flex justify-content-start align-items-center">
-                            <button class="btn btn-outline-success" @click="reporte()"><i
-                                    class="fa-regular fa-file-excel"></i></button><span style="margin: 0 10px;"></span>
-                            <button class="btn btn-outline-danger" @click=""><i class="fa-regular fa-file-pdf"></i></button>
-                        </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="fechafin">Fecha Fin</label>
+                                    <input class="form-control form-control-sm" type="text" id="fechafin" v-model="fechafin"
+                                        placeholder="Ej. año-mes-dia">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="ci">Palabra Clave</label>
+                                    <input class="form-control form-control-sm" type="text" id="palabra" v-model="palabraclave"
+                                        placeholder="Palabra clave">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="certificado">Buscar en Regional</label>
+                                    <select class="form-control form-control-sm" id="regional" v-model="regional">
+                                        <option value="">Seleccione Regional</option>
+                                        <option v-for="option in regionales" :value="option.name">{{
+                                            option.name
+                                        }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="solicitante">Solicitante</label>
+                                    <select class="form-control form-control-sm" id="solicitante" v-model="solicitante">
+                                        <option value="">Solicitante</option>
+                                        <option v-for="option in solicitantes" :value="option.name">{{
+                                            option.name
+                                        }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="partida">Partida</label>
+                                    <select class="form-control form-control-sm" id="partida" v-model="material">
+                                        <option value="">Seleccione Partida</option>
+                                        <option v-for="option in materiales" :value="option.description">{{
+                                            option.description
+                                        }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 d-flex justify-content-end align-items-center"
+                                    style="margin-top: 24px;">
+                                    <button type="submit" class="btn btn-outline-success"><i
+                                            class="fa-sharp fa-solid fa-magnifying-glass"></i></button><span
+                                        style="margin: 0 10px;"></span>
+                                    <button type="button" class="btn btn-outline-danger" @click="resetForm"><i
+                                            class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-start align-items-center"
+                                    style="margin-top: 24px;">
+
+                                    <button class="btn btn-outline-success" @click="reporte()"><i
+                                            class="fa-regular fa-file-excel"></i></button><span
+                                        style="margin: 0 10px;"></span>
+                                    <button class="btn btn-outline-danger" @click=""><i
+                                            class="fa-regular fa-file-pdf"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div v-if="errorMessage" class="alert alert-danger" v-text="errorMessage" :class="{ fadeOut: fadeOut }">
@@ -78,11 +94,11 @@
                                     <th>Administrador</th>
                                     <th>Departamento</th>
                                     <th>Articulo</th>
-                                    <th>Block Certificado</th>
+                                    <th>Pedido</th>
                                     <th>Entregado</th>
-                                    <th>Observacion</th>
-                                    <th>Del</th>
-                                    <th>Al</th>
+                                    <th>Total Entregado</th>
+                                    <th>Codigo</th>
+                                    <th>Code</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,9 +112,9 @@
                                     <td>{{ item.articulo }}</td>
                                     <td>{{ item.pedido }}</td>
                                     <td>{{ item.entregado }}</td>
-                                    <td>{{ item.observacion }}</td>
-                                    <td>{{ item.del }}</td>
-                                    <td>{{ item.al }}</td>
+                                    <td>{{ item.total_entregado}}</td>
+                                    <td>{{ item.codigo }}</td>
+                                    <td>{{ item.code }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -137,15 +153,19 @@ export default {
     },
     data() {
         return {
-            regional: '',
+            // VARIABLES DEL FORMULARIO
+            palabraclave: '',
             fechainicio: '',
             fechafin: '',
+            regional: '',
             solicitante: '',
-            certificado: '',
+            material: '',
+            // VARIBLE PARA LA CONSULTA 
             busquedas: [],
+            // VARIBLE PARA LOS CARGAR FILTROS 
             regionales: [],
             solicitantes: [],
-            certificados: [],
+            materiales: [],
             errorMessage: '',
             fadeOut: false,
         };
@@ -158,14 +178,15 @@ export default {
         // En el método reporte() del componente index.vue
         reporte() {
             const requestData = {
-                regional: this.regional,
+                palabraclave: this.palabraclave,
                 fechainicio: this.fechainicio,
                 fechafin: this.fechafin,
+                regional: this.regional,
                 solicitante: this.solicitante,
-                certificado: this.certificado
+                material: this.material,
             };
 
-            if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.certificado) {
+            if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.material && !this.palabraclave) {
                 this.errorMessage = "Se requiere al menos un valor para realizar la consulta.";
                 this.fadeOut = false;
                 setTimeout(() => {
@@ -177,12 +198,12 @@ export default {
                 return;
             }
 
-            axios.get('/api/exportReporteCO', { params: requestData, responseType: 'blob' })
+            axios.get('/api/exportReporteArticulos', { params: requestData, responseType: 'blob' })
                 .then(response => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', 'ReporteCertificadoOrigen.xlsx');
+                    link.setAttribute('download', 'ReporteArticulos.xlsx');
                     document.body.appendChild(link);
                     link.click();
                 })
@@ -193,12 +214,13 @@ export default {
 
         async submitForm() {
             try {
-                const respuesta = await axios.post('/api/busquedaCertificadoOrigen', {
-                    regional: this.regional,
+                const respuesta = await axios.post('/api/busquedaArticulos', {
+                    palabraclave: this.palabraclave,
                     fechainicio: this.fechainicio,
                     fechafin: this.fechafin,
+                    regional: this.regional,
                     solicitante: this.solicitante,
-                    certificado: this.certificado,
+                    material: this.material,
                 }, {
                     headers: {
                         'Accept': 'application/json',
@@ -211,25 +233,26 @@ export default {
         },
         async filtrosBusqueda() {
             try {
-                const respuesta = await axios.post('/api/filtrosBusqueda', {
+                const respuesta = await axios.post('/api/filtrosBusquedaArticulos', {
                     headers: {
                         'Accept': `application/json`,
                     },
                 });
                 this.regionales = respuesta.data.regional
                 this.solicitantes = respuesta.data.solicitante
-                this.certificados = respuesta.data.certificado
+                this.materiales = respuesta.data.material
             }
             catch (error) {
                 console.error(error);
             }
         },
         resetForm() {
-            this.regional = '';
+            this.palabraclave = '';
             this.fechainicio = '';
             this.fechafin = '';
+            this.regional = '';
             this.solicitante = '';
-            this.certificado = '';
+            this.material = '';
             this.busquedas = [];
         },
     },

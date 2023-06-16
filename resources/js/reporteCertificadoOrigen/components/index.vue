@@ -5,10 +5,10 @@
                 <h3 class="card-header">Reporte Certificados de Origen</h3>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-10 mb-4">
+                        <div class="col-md-10">
                             <form @submit.prevent="submitForm">
                                 <div class="row">
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
+                                    <div class="col-md-2">
                                         <label class="form-label" for="regional">Regional</label>
                                         <select class="form-control form-control-sm" id="regional" v-model="regional">
                                             <option value="">Seleccione Regional</option>
@@ -16,17 +16,17 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
+                                    <div class="col-md-2">
                                         <label class="form-label" for="fechainicio">Fecha Inicio</label>
                                         <input class="form-control form-control-sm" type="text" id="fachainicio"
                                             v-model="fechainicio" placeholder="Ej. año-mes-dia">
                                     </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
+                                    <div class="col-md-2">
                                         <label class="form-label" for="fechafin">Fecha Fin</label>
                                         <input class="form-control form-control-sm" type="text" id="fechafin"
                                             v-model="fechafin" placeholder="Ej. año-mes-dia">
                                     </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
+                                    <div class="col-md-2">
                                         <label class="form-label" for="ci">Servidor Publico</label>
                                         <select class="form-control form-control-sm" id="servidor" v-model="solicitante">
                                             <option value="">Seleccione Servidor Publico</option>
@@ -34,7 +34,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 mb-4" style="margin-top: 24px;">
+                                    <div class="col-md-2">
                                         <label class="form-label" for="certificado">Tipo Certificado</label>
                                         <select class="form-control form-control-sm" id="certificado" v-model="certificado">
                                             <option value="">Seleccione Tipo de Certificado</option>
@@ -43,8 +43,8 @@
                                             }}</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 mb-4 d-flex justify-content-end align-items-center"
-                                        style="margin-top: 24px;">
+                                    <div class="col-md-2 d-flex justify-content-end align-items-center"
+                                    >
                                         <button type="submit" class="btn btn-outline-success"><i
                                                 class="fa-sharp fa-solid fa-magnifying-glass"></i></button><span
                                             style="margin: 0 10px;"></span>
@@ -54,7 +54,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-2 mb-4 d-flex justify-content-start align-items-center">
+                        <div class="col-md-2 d-flex justify-content-start align-items-center">
                             <button class="btn btn-outline-success" @click="reporteExcel()"><i
                                     class="fa-regular fa-file-excel"></i></button><span style="margin: 0 10px;"></span>
                             <button class="btn btn-outline-danger" @click="reportePDF()"><i class="fa-regular fa-file-pdf"></i></button>
