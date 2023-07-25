@@ -9,7 +9,7 @@
                         <form @submit.prevent="submitForm">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label class="form-label" for="fechainicio">Fecha Inicio</label>
+                                    <label class="form-label">Fecha Inicio</label>
                                     <input class="form-control form-control-sm" type="text" id="fachainicio"
                                         v-model="fechainicio" placeholder="Ej. año-mes-dia">
                                 </div>
@@ -21,12 +21,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label class="form-label" for="ci">Palabra Clave</label>
+                                    <label class="form-label">Palabra Clave</label>
                                     <input class="form-control form-control-sm" type="text" id="palabra"
                                         v-model="palabraclave" placeholder="Palabra clave">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label" for="certificado">Buscar en Regional</label>
+                                    <label class="form-label">Buscar en Regional</label>
                                     <select class="form-control form-control-sm" id="regional" v-model="regional">
                                         <option value="">Seleccione Regional</option>
                                         <option v-for="option in regionales" :value="option.name">{{
@@ -59,10 +59,11 @@
                                 <div class="col-md-6 d-flex justify-content-end align-items-center"
                                     style="margin-top: 24px;">
                                     <button type="submit" class="btn btn-outline-success"><i
-                                            class="fa-sharp fa-solid fa-magnifying-glass"></i></button><span
-                                        style="margin: 0 10px;"></span>
+                                            class="fa-solid fa-magnifying-glass"></i></button>
+                                    <span style="margin: 0 10px;"></span>
                                     <button type="button" class="btn btn-outline-danger" @click="resetForm"><i
-                                            class="fa-solid fa-trash-can"></i></button>
+                                            class="fa-solid fa-trash-alt"></i></button>
+
                                 </div>
                                 <div class="col-md-6 d-flex justify-content-start align-items-center"
                                     style="margin-top: 24px;">
@@ -186,7 +187,8 @@ export default {
                 material: this.material,
             };
 
-            if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.material && !this.palabraclave) {
+            if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.material 
+            && !this.palabraclave) {
                 this.errorMessage = "Se requiere al menos un valor para realizar la consulta.";
                 this.fadeOut = false;
                 setTimeout(() => {
@@ -197,20 +199,27 @@ export default {
                 }, 5000);
                 return;
             }
-
-            axios.post('/api/exportReporteArticulos', { params: requestData, responseType: 'blob' })
+            // Realiza la solicitud HTTP a la función PDFReporteCertificadoOrigen
+            axios.post('/api/exportReporteArticulos', requestData, { responseType: 'blob' })
                 .then(response => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'ReporteArticulos.xlsx');
-                    document.body.appendChild(link);
-                    link.click();
+                    // Obtiene el archivo xlsx desde la respuesta
+                    const blob = new Blob([response.data], { type: 'application/xlsx' });
+                    // Crea un enlace de descarga para el archivo xlsx
+                    const downloadLink = document.createElement('a');
+                    const url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    downloadLink.download = 'ReporteArticulos.xlsx';
+                    // Simula un clic en el enlace de descarga para descargar el archivo PDF
+                    downloadLink.click();
+                    // Libera los recursos del objeto URL
+                    URL.revokeObjectURL(url);
                 })
                 .catch(error => {
+                    // Manejo de errores en caso de que ocurra algún problema en la solicitud
                     console.error(error);
                 });
         },
+
         reportePDF() {
             const requestData = {
                 palabraclave: this.palabraclave,

@@ -16,12 +16,10 @@ class ExcelReporteArticulos extends Controller
         $fechainicio = $request->input('fechainicio');
         $fechafin = $request->input('fechafin');
         $regional = $request->input('regional');
-        $material = $request->input('material');
         $solicitante = $request->input('solicitante');
+        $material = $request->input('material');
 
-        $export = new ConsultaArticulosExport($palabraclave, $fechainicio, $fechafin, $regional, $material, $solicitante);
-
-        return Excel::download($export, 'ReporteArticulos.xlsx');
+        return Excel::download(new ConsultaArticulosExport($palabraclave, $fechainicio, $fechafin, $regional, $material, $solicitante), 'ReporteArticulos.xlsx');
     }
     public function PDFReporteArticulos(Request $request)
     {

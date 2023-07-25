@@ -2,19 +2,16 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
 use App\Models\ConsultaReporteCertificadosOrigen;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
-
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-
+use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings, WithColumnWidths
 {
@@ -25,7 +22,7 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
     private $fechafin;
     private $solicitante;
     private $certificado;
-    private $totalRegistros; // Define the property here
+    private $totalRegistros; 
 
 
     public function __construct($regional, $fechainicio, $fechafin, $solicitante, $certificado)
@@ -35,7 +32,7 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
         $this->fechafin = $fechafin;
         $this->solicitante = $solicitante;
         $this->certificado = $certificado;
-        $this->totalRegistros = $this->getTotalRegistros(); // Assign the value here
+       $this->totalRegistros = $this->getTotalRegistros();
 
     }
     public function view(): View
@@ -47,8 +44,7 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
             $this->solicitante,
             $this->certificado
         );
-
-        return view('exports.Excel.ConsultaReporteCertificadosOrigen', ['busqueda' => $busqueda]);
+        return view('exports.excel.ConsultaReporteCertificadosOrigen', ['busqueda' => $busqueda]);
     }
 
     public function columnWidths(): array
@@ -132,6 +128,7 @@ class ConsultaCertificadoOrigenExport implements FromView, ShouldAutoSize, WithS
             $this->fechafin,
             $this->solicitante,
             $this->certificado
-        )->count();
-    }
+            )->count();
+        }
+        
 }

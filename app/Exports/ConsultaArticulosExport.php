@@ -7,9 +7,9 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithDrawings;
-use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
@@ -22,8 +22,8 @@ class ConsultaArticulosExport implements FromView, ShouldAutoSize, WithStyles, W
     private $fechainicio;
     private $fechafin;
     private $regional;
-    private $material;
     private $solicitante;
+    private $material;
     private $totalRegistros;
 
 
@@ -49,7 +49,7 @@ class ConsultaArticulosExport implements FromView, ShouldAutoSize, WithStyles, W
             $this->solicitante
         );
 
-        return view('exports.Excel.ConsultaReporteArticulos', ['busqueda' => $busqueda]);
+        return view('exports.excel.ConsultaReporteArticulos', ['busqueda' => $busqueda]);
     }
 
     public function columnWidths(): array

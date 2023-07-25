@@ -162,7 +162,7 @@ export default {
                 fechainicio: this.fechainicio,
                 fechafin: this.fechafin,
                 solicitante: this.solicitante,
-                certificado: this.certificado
+                certificado: this.certificado,
             };
 
             if (!this.regional && !this.fechainicio && !this.fechafin && !this.solicitante && !this.certificado) {
@@ -176,20 +176,27 @@ export default {
                 }, 5000);
                 return;
             }
-
-            axios.post('/api/exportReporteCO', { params: requestData, responseType: 'blob' })
+            // Realiza la solicitud HTTP a la función PDFReporteCertificadoOrigen
+            axios.post('/api/exportReporteCO', requestData, { responseType: 'blob' })
                 .then(response => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'ReporteCertificadoOrigen.xlsx');
-                    document.body.appendChild(link);
-                    link.click();
+                    // Obtiene el archivo xlsx desde la respuesta
+                    const blob = new Blob([response.data], { type: 'application/xlsx' });
+                    // Crea un enlace de descarga para el archivo xlsx
+                    const downloadLink = document.createElement('a');
+                    const url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    downloadLink.download = 'ReporteCertificadoOrigen.xlsx';
+                    // Simula un clic en el enlace de descarga para descargar el archivo PDF
+                    downloadLink.click();
+                    // Libera los recursos del objeto URL
+                    URL.revokeObjectURL(url);
                 })
                 .catch(error => {
+                    // Manejo de errores en caso de que ocurra algún problema en la solicitud
                     console.error(error);
                 });
         },
+
         reportePDF() {
             const requestData = {
                 regional: this.regional,

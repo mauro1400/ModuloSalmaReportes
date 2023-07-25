@@ -21,10 +21,10 @@ class ExcelReporteCertificadoOrigen extends Controller
         if (empty($certificado)) {
             $certificado = "CERTIFICADO";
         }
-        $export = new ConsultaCertificadoOrigenExport($regional, $fechainicio, $fechafin, $solicitante, $certificado);
 
-        return Excel::download($export, 'ReporteCertificadoOrigen.xlsx');
+        return Excel::download(new ConsultaCertificadoOrigenExport($regional, $fechainicio, $fechafin, $solicitante, $certificado), 'ReporteCertificadoOrigen.xlsx');
     }
+
     public function PDFReporteCertificadoOrigen(Request $request)
     {
         $pdf = app('dompdf.wrapper');
